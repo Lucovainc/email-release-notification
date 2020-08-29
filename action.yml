@@ -1,0 +1,6 @@
+# action.yml
+name: 'Email Release Notification'
+description: 'Send an email when a new release is published'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
