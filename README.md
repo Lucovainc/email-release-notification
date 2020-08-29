@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Notify about a new release
-      uses: ba-st-actions/email-release-notification@v3.0.0
+      uses: addie/email-release-notification@v3.1.3
       env:
         SENDGRID_API_TOKEN: ${{ secrets.SENDGRID_API_TOKEN }}
         RECIPIENTS_URL: ${{ secrets.RECIPIENTS_URL }}
