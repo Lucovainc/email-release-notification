@@ -4,6 +4,7 @@ const showdown     = require('showdown');
 const sendgridMail = require('@sendgrid/mail');
 
 const setCredentials = () => sendgridMail.setApiKey(process.env.SENDGRID_API_TOKEN);
+const teamName = 'AVM Verifications';
 
 async function prepareMessage(recipients, lists) {
   const { repository, release } = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
@@ -15,13 +16,12 @@ async function prepareMessage(recipients, lists) {
   const releaseVersion = release.tag_name;
   const releaseName = release.name;
   const releaseURL = release.html_url;
-  const ownerResponse = await axios.get(repository.owner.url);
-  const ownerName = ownerResponse.data.name;
+  const ownerName = process.env.OWNER;
 
   // Templates
-  const subject = `[ANN] ${repoName} ${releaseVersion} [${releaseName}] released!`;
+  const subject = `[ANN] ${repoName} ${releaseVersion} [${releaseName}] Release Notes`;
   const footer = `\n\nRegards,\n\nThe ${ownerName} team`;
-  const header = `[${repoName}](${repoURL})${repoDescription} reached it's [${releaseVersion}](${releaseURL}) version.`;
+  const header = `[${repoName}](${repoURL})${repoDescription} - Version [${releaseVersion}](${releaseURL})`;
 
   const releaseBody = converter.makeHtml(`${header}\n\n${release.body}${footer}`);
 
