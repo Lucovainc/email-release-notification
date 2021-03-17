@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Notify about a new release
-      uses: addie/email-release-notification@v3.1.3
+      uses: Lucovainc/email-release-notification@v3.1.3
       env:
         SENDGRID_API_TOKEN: ${{ secrets.SENDGRID_API_TOKEN }}
         RECIPIENTS_URL: ${{ secrets.RECIPIENTS_URL }}
